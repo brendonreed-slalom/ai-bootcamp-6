@@ -17,7 +17,7 @@ Users can immediately identify which incomplete todos are past their due date th
 
 **Acceptance Scenarios**:
 
-1. **Given** a todo with a due date in the past and incomplete status, **When** the user views the todo list, **Then** the todo displays with overdue visual styling (distinct color/indicator)
+1. **Given** a todo with a due date in the past and incomplete status, **When** the user views the todo list, **Then** the todo displays with overdue visual styling (todo title text in danger color with warning icon)
 2. **Given** a todo with a due date today and incomplete status, **When** the user views the todo list, **Then** the todo does NOT display with overdue styling
 3. **Given** a todo with a due date in the past and completed status, **When** the user views the todo list, **Then** the todo does NOT display with overdue styling (completed todos are never overdue)
 4. **Given** a todo with no due date set, **When** the user views the todo list, **Then** the todo does NOT display with overdue styling
@@ -53,7 +53,7 @@ Users can see how many days a todo is overdue to understand urgency level.
 ### Functional Requirements
 
 - **FR-001**: System MUST identify todos as overdue when their due date is before the current date AND the todo is incomplete
-- **FR-002**: System MUST apply distinct visual styling to overdue todos that contrasts with normal todos
+- **FR-002**: System MUST apply distinct visual styling to overdue todos by rendering the todo title text in danger color and displaying a warning icon
 - **FR-003**: System MUST calculate and display the number of days a todo is overdue
 - **FR-004**: System MUST NOT mark completed todos as overdue, regardless of their due date
 - **FR-005**: System MUST NOT mark todos without a due date as overdue
@@ -84,14 +84,15 @@ Users can see how many days a todo is overdue to understand urgency level.
 ### Design Consistency
 
 - Overdue visual styling must follow the established design system:
-  - Use defined danger color from theme (#c62828 light mode, #ef5350 dark mode)
+  - Todo title text rendered in defined danger color from theme (#c62828 light mode, #ef5350 dark mode)
+  - Warning icon displayed adjacent to todo title (standard 20px × 20px icon size from design system)
   - Maintain consistent spacing and typography
   - Respect dark/light mode theming
 
 ### Accessibility
 
-- Overdue status must be conveyed through both color AND text/icon (not color alone)
-- ARIA labels should identify overdue status for screen readers
+- Overdue status must be conveyed through both color AND text/icon (not color alone) - warning icon serves as visual indicator beyond color
+- ARIA labels should identify overdue status for screen readers (e.g., aria-label="overdue")
 - Keyboard navigation must work with overdue todos
 
 ## Assumptions
@@ -109,3 +110,9 @@ Users can see how many days a todo is overdue to understand urgency level.
 - Historical tracking of how long a todo was overdue
 - Bulk actions on overdue todos
 - Configurable timezone settings (uses browser timezone)
+
+## Clarifications
+
+### Session 2025-12-12
+
+- Q: Visual Styling Implementation - The spec requires "distinct visual styling" for overdue todos (FR-002), but doesn't specify HOW the styling should be applied. Options were: (A) Change entire card background, (B) Text color + icon, (C) Left border, (D) Badge/chip. → A: Text color to danger color + add warning icon
