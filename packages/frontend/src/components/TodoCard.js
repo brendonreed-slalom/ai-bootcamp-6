@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isOverdue, calculateDaysOverdue } from '../utils/dateUtils';
 
 function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -62,6 +63,10 @@ function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
     });
   };
 
+  // Calculate overdue status
+  const overdue = isOverdue(todo.dueDate, todo.completed);
+  const daysOverdue = overdue ? calculateDaysOverdue(todo.dueDate) : 0;
+
   if (isEditing) {
     return (
       <div className="todo-card todo-card-edit">
@@ -118,10 +123,18 @@ function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
       />
 
       <div className="todo-content">
-        <h3 className="todo-title">{todo.title}</h3>
+        <h3 className={`todo-title${overdue ? ' overdue' : ''}`}>
+          {overdue && <span className="warning-icon" aria-label="overdue" role="img">⚠️</span>}
+          {todo.title}
+        </h3>
         {todo.dueDate && (
           <p className="todo-due-date">
             Due: {formatDate(todo.dueDate)}
+            {overdue && (
+              <span className="overdue-text">
+                {daysOverdue} day{daysOverdue !== 1 ? 's' : ''} overdue
+              </span>
+            )}
           </p>
         )}
       </div>

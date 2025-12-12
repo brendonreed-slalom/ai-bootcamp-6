@@ -51,3 +51,19 @@
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
 }
+
+/* Overdue Styling */
+.todo-title.overdue {
+  color: var(--danger-color);
+}
+
+.warning-icon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.overdue-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-left: 8px;
+}
