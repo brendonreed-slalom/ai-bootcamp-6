@@ -8,7 +8,7 @@ description: "Task list template for feature implementation"
 **Input**: Design documents from `/specs/[###-feature-name]/`
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**Tests**: Per the [constitution](../.specify/memory/constitution.md), tests are NON-NEGOTIABLE. All user stories MUST include test tasks that are completed BEFORE implementation tasks (RED-GREEN-REFACTOR cycle).
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -79,23 +79,30 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 1 (MANDATORY - RED phase) 🔴
 
-> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+> **CONSTITUTION REQUIREMENT: Write these tests FIRST, ensure they FAIL before implementation (RED-GREEN-REFACTOR)**
 
-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T010 [P] [US1] Unit test for [component/function] in packages/[frontend|backend]/src/__tests__/[name].test.js
+- [ ] T011 [P] [US1] Integration test for [user journey/API endpoint] in packages/[frontend|backend]/src/__tests__/[name].test.js
+- [ ] T012 [US1] Verify all tests FAIL (RED phase complete) before proceeding to implementation
 
-### Implementation for User Story 1
+### Implementation for User Story 1 (GREEN phase) 🟢
 
-- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
-- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
-- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
-- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T016 [US1] Add validation and error handling
-- [ ] T017 [US1] Add logging for user story 1 operations
+- [ ] T013 [P] [US1] Create [Component/Service] in packages/[frontend|backend]/src/[location]/[file].js
+- [ ] T014 [P] [US1] Create [supporting utility/helper] in packages/[frontend|backend]/src/[location]/[file].js
+- [ ] T015 [US1] Implement [business logic] (depends on T013, T014)
+- [ ] T016 [US1] Add error handling with meaningful messages
+- [ ] T017 [US1] Verify all tests PASS (GREEN phase complete)
 
-**Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
+### Refactor for User Story 1 (REFACTOR phase) 🔧
+
+- [ ] T018 [US1] Apply DRY principle - extract common code to utilities
+- [ ] T019 [US1] Verify single responsibility - ensure components/services do one thing well
+- [ ] T020 [US1] ESLint check - resolve all warnings
+- [ ] T021 [US1] Verify tests still PASS after refactoring
+
+**Checkpoint**: At this point, User Story 1 should be fully functional, tested, and refactored
 
 ---
 

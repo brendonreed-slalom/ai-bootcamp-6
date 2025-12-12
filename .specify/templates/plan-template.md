@@ -31,7 +31,15 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+Verify compliance with [AI Bootcamp Todo App Constitution](../.specify/memory/constitution.md):
+
+- [ ] **Test-First Development**: Feature spec includes testable acceptance criteria; test plan identified
+- [ ] **Code Quality**: Follows naming conventions, DRY, KISS, and single responsibility principles
+- [ ] **Modularity**: Clear separation between components (presentation) and services (logic)
+- [ ] **Design System**: UI changes adhere to defined color palette, typography, spacing (8px grid), and accessibility standards
+- [ ] **Scope Discipline**: Feature is within defined functional requirements; no scope creep
+- [ ] **Architecture Alignment**: Fits within monorepo structure (frontend/backend packages)
+- [ ] **Technology Constraints**: Uses approved stack (React, Express, Jest, ESLint)
 
 ## Project Structure
 
